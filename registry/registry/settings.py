@@ -14,8 +14,7 @@ import os
 
 from django.conf import settings
 
-
-
+#sendgrid mail settings goes here
 
 
 
@@ -32,7 +31,7 @@ SECRET_KEY = 'g3b-p#_d-&tb9x4*f@6h5o(k*rv6=cho+md&=#%iatv!88(zo0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'0.0.0.0','45.79.75.122']
+ALLOWED_HOSTS = []
 
 # Application definition
 
