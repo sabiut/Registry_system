@@ -1,0 +1,86 @@
+<!--payslip.html-->
+
+
+
+{% extends "dashboard.html"%}
+
+{%block content%}
+
+<!--<p> My Payslip information</p>-->
+<div class="container">
+
+  <h3><span data-feather="align-justify"></span> Manage My Portoriki Church Minutes</h3>
+  <ul class="nav nav-pills">
+    <!--<li><a href="#"><span data-feather="pie-chart"></span> My payslip report</a></li>-->
+    <li><a href="{% url 'addminute'%}"><span data-feather="plus-square"></span>Add Minutes</a></li>
+    <li><a href="{% url 'bydate'%}"><span data-feather="bar-chart-2"></span>By Date</a></li>
+      <li><a href="{%url 'download_csv'%}"> <span data-feather="download-cloud"></span> Download CSV File </a></li>
+  <!--<li class="active"><a href="#"> <span data-feather="bar-chart-2"></span> My Vatu Account Reports </a></li>-->
+
+</div>
+
+
+
+<table class="table table-striped">
+  <thead>
+
+
+<!-- testing Begins-->
+
+
+<tr>
+
+
+  <!--<th><span class="glyphicon glyphicon-edit" > </span> Edit Record</th>-->
+  <th></th>
+
+
+    <!--<th>Curency</th>
+
+  <th>rate</th>
+  <th>Post Date</th>-->
+</tr>
+
+</thead>
+
+
+
+
+<tr>
+{%for a in results%}
+<!--<td><a href ="/update_Leaveform/{{ a.id}}/"><span class="glyphicon glyphicon-edit"></span></a> </td>-->
+
+
+
+
+<!--
+<td>#</td>
+  <td>#</td>
+    <td>#</td>
+    <td>#</td>
+-->
+  </tr>
+
+
+
+
+{%endfor%}
+
+<tr  class="success">
+  <td>
+    <form action="{% url 'bydatequery'%}" method="post">{% csrf_token %}
+
+    <h5><i class="fa fa-angle-double-right" aria-hidden="true"></i> Select Date: <input type="date" name="selectdate">
+    <input type="submit" class="btn btn-info"  value="Submit Query "></h5>
+
+  </form>
+
+
+
+</td>
+</tr>
+</form>
+</table>
+
+
+{%endblock%}

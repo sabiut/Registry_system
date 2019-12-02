@@ -1,0 +1,45 @@
+<!--payslip.html-->
+
+<style>
+
+.css-serial {
+  counter-reset: serial-number;  /* Set the serial number counter to 0 */
+}
+
+.css-serial td:first-child:before {
+  counter-increment: serial-number;  /* Increment the serial number counter */
+  content: counter(serial-number);  /* Display the counter */
+}
+
+</style>
+
+{% extends "dashboard.html"%}
+
+{%block content%}
+
+<!--<p> My Payslip information</p>-->
+<div class="container">
+
+  <h3><span data-feather="align-justify"></span> Manage My Portoriki Church Minutes</h3>
+  <ul class="nav nav-pills">
+    <!--<li><a href="#"><span data-feather="pie-chart"></span> My payslip report</a></li>-->
+    <li><a href="{% url 'selectprovince'%}"><span data-feather="plus-square"></span>Add Minutes</a></li>
+    <li><a href="{% url 'selectprovince'%}"><span data-feather="bar-chart-2"></span>By Date</a></li>
+      <li><a href="{%url 'download_csv'%}"> <span data-feather="download-cloud"></span> Download CSV File </a></li>
+  <!--<li class="active"><a href="#"> <span data-feather="bar-chart-2"></span> My Vatu Account Reports </a></li>-->
+
+</div>
+<br><br>
+<div class="card">
+<form  action="" method="post">
+  {% csrf_token %}
+  <table>
+  {{form.as_table}}
+</table><br>
+<button type="button submit" class="btn btn-success">Update Minute</button>
+
+</form>
+</div>
+
+
+{%endblock%}

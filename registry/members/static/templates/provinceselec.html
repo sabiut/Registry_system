@@ -1,0 +1,142 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!--set up excel-->
+  <script type="text/javascript">
+  var tableToExcel = (function() {
+  var uri = 'data:application/vnd.ms-excel;base64,'
+  , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+  , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+  , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+  return function(table, name) {
+  if (!table.nodeType) table = document.getElementById(table)
+  var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+  window.location.href = uri + base64(format(template, ctx))
+  }
+  })()
+  </script>
+
+  <!-- End file set up excel_file-->
+
+</head>
+
+
+
+{% extends "dashboard.html"%}
+
+{%block content%}
+
+<!--<p> My Payslip information</p>-->
+<div class="container">
+
+  <h3><span data-feather="align-justify"></span> Manage My Portoriki Church Report</h3>
+  <ul class="nav nav-pills">
+    <!--<li><a href="#"><span data-feather="pie-chart"></span> My payslip report</a></li>-->
+    <li><a href="{% url 'selectprovince'%}"><span data-feather="list"></span>By Province</a></li>
+    <li><a href="{%url 'selectisland'%}"><span data-feather="list"></span>By Island </a></li>
+
+    <li><a href="{%url 'download_csv'%}"> <span data-feather="download-cloud"></span> Download CSV File </a></li>
+          <li><a href="#"  onclick="tableToExcel('table', ' church members');return false;"><i style="font-size:24px" class="fa">&#xf1c3;</i> Download Excel File</a></li>
+    <!--<li><a href="#"> <span data-feather="download"></span>  </a></li>
+  <li class="active"><a href="#"> <span data-feather="bar-chart-2"></span> My Vatu Account Reports </a></li>-->
+
+</div>
+
+
+
+<table id ="table" class="table table-striped">
+  <thead>
+
+
+<!-- testing Begins-->
+
+
+<tr>
+
+
+  <!--<th><span class="glyphicon glyphicon-edit" > </span> Edit Record</th>-->
+  <th></th>
+
+
+    <!--<th>Curency</th>
+
+  <th>rate</th>
+  <th>Post Date</th>-->
+</tr>
+
+</thead>
+
+
+
+
+<tr>
+{%for a in results%}
+<!--<td><a href ="/update_Leaveform/{{ a.id}}/"><span class="glyphicon glyphicon-edit"></span></a> </td>-->
+
+
+
+
+<!--
+<td>#</td>
+  <td>#</td>
+    <td>#</td>
+    <td>#</td>
+-->
+  </tr>
+
+
+
+
+{%endfor%}
+
+<tr  class="success">
+  <td>
+  <form action="{%url 'display_query'%}" method="post">{% csrf_token %}
+
+  <!--  <h5><i class="fa fa-angle-double-right" aria-hidden="true"></i> Select Date: <input type="date" name="selectdate">-->
+    <!--<input type="submit" class="btn btn-info"  value="View Balance Report "></h5>-->
+
+
+</td>
+
+
+<!--<td>Select Pay Number:</td>-->
+      <td>Select a Province:
+<select name="sel_province">
+        <option value="Torba">Torba</option>
+        <option value="Sanma">Sanma</option>
+        <option value="Penama">Penama</option>
+        <option value="Malampa">Malampa</option>
+        <option value="Shefa">Shefa</option>
+        <option value="Tafea">Tafea</option>
+
+        <!--<option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>-->
+
+</select>
+
+<input type="submit"  class="btn btn-info"  value="Submit Query"/>
+
+</td>
+</tr>
+</form>
+</table>
+
+
+{%endblock%}

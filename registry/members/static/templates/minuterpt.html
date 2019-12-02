@@ -1,0 +1,131 @@
+<!--payslip.html-->
+<head>
+
+  <!-- export to word doc-->
+
+<script type="text/javascript" src="http://github.com/aadel112/googoose/jquery.googoose.js"></script>
+  <!--end word doc-->
+
+
+  <!--Bootstrap table-->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!--end Bootstrap tabel-->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script language="Javascript1.2">
+    <!--
+    function printpage() {
+    window.print();
+    }
+    //-->
+  </script>
+
+</head>
+
+
+<body>
+
+  <!-- export to word -->
+<script type="text/javascript">
+function export2Word( element ) {
+
+ var html, link, blob, url, css;
+
+ css = (
+   '<style>' +
+   '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
+   'div.WordSection1 {page: WordSection1;}' +
+   '</style>'
+ );
+
+ html = element.innerHTML;
+ blob = new Blob(['\ufeff', css + html], {
+   type: 'application/msword'
+ });
+ url = URL.createObjectURL(blob);
+ link = document.createElement('A');
+ link.href = url;
+ link.download = 'Document';  // default name without extension
+ document.body.appendChild(link);
+ if (navigator.msSaveOrOpenBlob ) navigator.msSaveOrOpenBlob( blob, 'Document.doc'); // IE10-11
+     else link.click();  // other browsers
+ document.body.removeChild(link);
+};
+  </script>
+  <!--end export to word doc-->
+
+<div id="docx"> <!--div id for html to word conversion-->
+  <div class="WordSection1"> <!--div id for html to word conversion-->
+
+<table>
+  <tr>
+    <td>{% load  static %}
+  <img src="{% static 'media/logo.png' %}" /></td>
+
+  {%for a in selected_objects%}
+  <tr><td>
+<b>Minute Taken By:  {{a.Taken_By}}</b>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Agender:{{a.Agender}}</b> </td>
+<td>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Date: {{a.date}}</b></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:window.print()"> <i style="font-size:24px;color:blue" class="fa">&#xf02f;</i></a></td>
+
+
+
+
+<td>&nbsp;&nbsp;&nbsp;<a href="#" onclick="export2Word(window.docx);return false;"><i style="font-size:24px" class="fa">&#xf1c2;</i></a>  </td>
+{%endfor%}
+</tr>
+</table>
+<hr>
+<table>
+  <tr>
+<td><b><u>Minute</u></b></td>
+</tr>
+<tr>
+  <td>
+    <p>
+      {%for a in selected_objects%}
+
+      {{a.body}}
+      {%endfor%}
+
+   </p>
+
+  </td>
+</tr>
+
+
+<!--comment-->
+
+<tr>
+<td><b><u>Comments</u></b></td>
+</tr>
+<tr>
+<td>
+  <p>
+    {%for a in selected_objects%}
+
+    {{a.comment}}
+    {%endfor%}
+
+ </p>
+
+</td>
+</tr>
+</table>
+
+
+
+</div>
+</div>
+
+</body>

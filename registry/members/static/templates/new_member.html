@@ -1,0 +1,47 @@
+<head>
+  <meta charset="utf-8" />
+
+<!--date picker-->
+
+<link href="/media/css/base.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/media/js/core.js"></script>
+
+<!--end date picker-->
+
+<style type ="text/css">
+
+#main{
+width:910px;
+height:620px;
+margin:30px auto
+}
+</style>
+</head>
+<body>
+{%extends 'dashboard.html'%}
+
+{%block content%}
+
+{{ form.media }}
+
+
+
+
+<div class="card">
+<form  action="" method="post">
+  {% csrf_token %}
+  <table>
+  {{form.as_table}}
+</table>
+<button type="button submit" class="btn btn-success">Add Member</button>
+
+
+
+
+
+
+</form>
+</div>
+{%endblock%}
+</body>

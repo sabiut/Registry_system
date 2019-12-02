@@ -1,0 +1,118 @@
+<!-- -->
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<style>
+
+.css-serial {
+  counter-reset: serial-number;  /* Set the serial number counter to 0 */
+}
+
+.css-serial td:first-child:before {
+  counter-increment: serial-number;  /* Increment the serial number counter */
+  content: counter(serial-number);  /* Display the counter */
+}
+
+</style>
+
+
+<!--set up excel-->
+<script type="text/javascript">
+var tableToExcel = (function() {
+var uri = 'data:application/vnd.ms-excel;base64,'
+, template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+, base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+, format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+return function(table, name) {
+if (!table.nodeType) table = document.getElementById(table)
+var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+window.location.href = uri + base64(format(template, ctx))
+}
+})()
+</script>
+
+<!-- End file set up excel_file-->
+
+
+
+
+
+</head>
+
+
+
+{% extends "dashboard.html"%}
+
+{%block content%}
+
+
+<div class="container">
+
+  <h3><span data-feather="align-justify"></span> Manage My Portoriki Church Report</h3>
+  <ul class="nav nav-pills">
+    <!--<li><a href="#"><span data-feather="pie-chart"></span> My payslip report</a></li>-->
+    <li><a href="{% url 'selectprovince'%}"><span data-feather="list"></span> By Province</a></li>
+    <li><a href="{%url 'selectisland'%}"><span data-feather="list"></span> By Island </a></li>
+      <li><a href="{%url 'download_csv'%}"> <span data-feather="download-cloud"></span> Download CSV File </a></li>
+
+      <li><a href="#"  onclick="tableToExcel('table', ' church members');return false;"><i style="font-size:24px" class="fa">&#xf1c3;</i> Download Excel File</a></li>
+  <!--<li class="active"><a href="#"> <span data-feather="bar-chart-2"></span> My Vatu Account Reports </a></li>-->
+
+</div>
+
+<table id="table" class="table table-striped css-serial">
+  <thead>
+
+<tr>
+
+<th>#</th>
+<th><span data-feather="edit-3"></span>Edit</th>
+<th><span data-feather="trash-2"></span>Drop Record</th>
+  <th>First Name</th>
+  <th>Middle Name</th>
+  <th>Last Name</th>
+  <th>Date of Birth</th>
+  <th>Gender</th>
+  <th>Island</th>
+  <th>Province</th>
+  <th>Date of Baptism</th>
+  <th>Congregation</th>
+  <th>Status</th>
+  <th>Comments</th>
+
+
+</tr>
+
+</thead>
+
+{%for a in query_name%}
+
+<tr  class="success">
+  <td></td>
+  <!--<td><a class="nav-link" href="/updatecontact/{{a.id}}/"><span data-feather="edit-3"></span></a></td>
+-->
+<td><a class="nav-link" href="{% url 'updatecontact' a.id %}"><span data-feather="edit-3"></span></a></a></td>
+<td><a class="nav-link" href="{% url 'kill_entry' a.id %}"><span data-feather="trash-2"></span></a></a></td>
+
+
+<td>{{a.First_Name}}</td>
+<td>{{a.Middle_Name}}</td>
+<td>{{a.Last_Name}}</td>
+<td>{{a.Date_of_Birth}}</td>
+<td>{{a.Gender}}</td>
+<td>{{a.Island}}</td>
+<td>{{a.Province}}</td>
+<td>{{a.Date_of_Baptism}}</td>
+<td>{{a.Congregation}}</td>
+<td>{{a.Status}}</td>
+<td>{{a.Comments}}</td>
+
+</tr>
+{%endfor%}
+
+</table>
+
+
+{%endblock%}
