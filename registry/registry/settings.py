@@ -15,13 +15,7 @@ import os
 from django.conf import settings
 
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_BACKEND = "sgbackend.SendGridBackend"
-SENDGRID_USER = "suabiut"
-SENDGRID_PASSWORD = "TesT1234!@#$"
-SENDGRID_API_KEY="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"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+
 
 
 
